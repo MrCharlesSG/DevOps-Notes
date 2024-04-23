@@ -1,5 +1,36 @@
+<!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
+
+- [Docker](#docker)
+- [Introduction](#introduction)
+   * [Containers](#containers)
+      + [Linux Containers](#linux-containers)
+      + [Microsoft Containers](#microsoft-containers)
+      + [Microsoft vs Linux](#microsoft-vs-linux)
+      + [Mac Containers](#mac-containers)
+   * [Kubernetes](#kubernetes)
+   * [Docker](#docker-1)
+      + [Docker, Inc.](#docker-inc)
+      + [Technology](#technology)
+   * [The Open Container Initiative (OCI)](#the-open-container-initiative-oci)
+- [The Docker Engine](#the-docker-engine)
+   * [Docker Engine - The TLDR](#docker-engine-the-tldr)
+   * [Docker Engine - The Deep Dive](#docker-engine-the-deep-dive)
+      + [Get rid of LXC](#get-rid-of-lxc)
+      + [Get rid of the monolithic daemon](#get-rid-of-the-monolithic-daemon)
+      + [runc](#runc)
+      + [containerd](#containerd)
+      + [Starting a new container](#starting-a-new-container)
+      + [Shim](#shim)
+      + [Securing client and daemon communication](#securing-client-and-daemon-communication)
+- [Images](#images)
+   * [Images and Containers](#images-and-containers)
+
+<!-- TOC end -->
+
+<!-- TOC --><a name="docker"></a>
 # Docker
 
+<!-- TOC --><a name="introduction"></a>
 # Introduction
 
 Applications are the heart of the businesses. If applications break, bussinesses break. 
@@ -10,6 +41,7 @@ Eventually virtual machines (VM) appears. The technollogy allowed us to safely a
 
 The problem is that each VM requires its own operating system (OS). Every OS consumes CPU, RAM and other resources that could otherwise be used to power more applications. Every OS needs patching and monitoring. Almost every OS requires a licese. All of this results in waste time and resources. VMs are, also, slow to boot, and portability isn’t great
 
+<!-- TOC --><a name="containers"></a>
 ## Containers
 
 In the container model, the container is roughly analogous to the VM. A major difference is that containers do not require their own OS. In fact, all containers on a single host share the host’s OS. This solves all the problems VMs have. Containers are fast to start and ultra-portable.
@@ -17,24 +49,29 @@ In the container model, the container is roughly analogous to the VM. A major di
 > Containers are lightweight, standalone, and executable package that contains everything needed to run a piece of software. It encapsulate an application and its dependencies, allowing it to run reliably and consistently accross different computing enviroments.
 > 
 
+<!-- TOC --><a name="linux-containers"></a>
 ### Linux Containers
 
 Linux containers are a crucial component of modern computing, originating from extensive contributions within the Linux community, notably from Google. Docker which democratized their usage. While similar concepts existed before Docker, its simplicity made containers accessible to a wider audience.
 
+<!-- TOC --><a name="microsoft-containers"></a>
 ### Microsoft Containers
 
 Microsoft has also made significant strides, bringing Docker and container technologies to the Windows platform, enabling compatibility with Linux containers through tools like Docker Desktop. 
 
+<!-- TOC --><a name="microsoft-vs-linux"></a>
 ### Microsoft vs Linux
 
 It is vital to understand that a running container sares the kernel of the host machine it is running on. This means that a containerized Windows app will not run on a Linux-based Docker host. 
 
 It is possible to run Linux containers on Windows machines. For example, Docker Desktop running on Windows has two modes: windows and linux containers.  Linux container run either inside a lightweight Hyper-V VM or using the Windows Subsystem for Linux (WSL).
 
+<!-- TOC --><a name="mac-containers"></a>
 ### Mac Containers
 
 Mac containers don't exist; developers typically run Linux containers on their Mac using Docker Desktop, which operates them within a lightweight Linux VM.
 
+<!-- TOC --><a name="kubernetes"></a>
 ## Kubernetes
 
 Kubernetes is an open-source project out of Google that has quickly emerged as the most popular tool for deploying and managing containerized apps.
@@ -46,10 +83,12 @@ Kubernetes is an open-source project out of Google that has quickly emerged as t
 
 Kubernetes uses Docker as its default container runtime (will be explained later what this means).  However, Kubernetes has a pluggable container runtime interface (CRI) that makes it easy to swap-out Docker for a different container runtime. In the future, Docker might be replaced by `containerd` as the default container runtime in Kubernetes. Summarizing, `containerd` is the small specialized part of Docker that does the low-level tasks of starting and stopping containers.
 
+<!-- TOC --><a name="docker-1"></a>
 ## Docker
 
 When we refer Docker we can refer both, Docker Inc. and the technology.
 
+<!-- TOC --><a name="docker-inc"></a>
 ### Docker, Inc.
 
 Company founded in San Francisco by Solomon Hykes (not anymore in the company). Started as a platform as a service (PaaS provider called dotCloud. Behind the scenes, the dotClodu platform was build on Linux containers. 
@@ -58,19 +97,23 @@ To help create and manage these containers, they built an in-house tool with the
 
 In 2013 they god rid of the PaaS sidde of the business, rebranded the company and focussed on bringing Docker and containers to the world. They have success in this task but are far to make a profitable business.
 
+<!-- TOC --><a name="technology"></a>
 ### Technology
 
 Docker is a softare that runs in Linux and Windows. It creates, manages, and can even orchestrate containers.
 The software is currently built from various tools from the *Moby* open-source project. Later will be explain how it works.
 
+<!-- TOC --><a name="the-open-container-initiative-oci"></a>
 ## The Open Container Initiative (OCI)
 
 The OCI is a governance council, organized under the auspices of the Linux Foundations, responsible for standarizing the low-level fundamental components of container infrastructure. In particular it focusses on image format and container runtime.
 
+<!-- TOC --><a name="the-docker-engine"></a>
 # The Docker Engine
 
 To master a technology, it is neccessary to understand what is going on under the hood.
 
+<!-- TOC --><a name="docker-engine-the-tldr"></a>
 ## Docker Engine - The TLDR
 
 The Docker engine is the core software that runs and manages containers. We often refer to it simply as Docker.
@@ -87,6 +130,7 @@ and various plugins such as networking and storage. Together, these create and r
 
 ![Untitled](images_docker/Untitled.png)
 
+<!-- TOC --><a name="docker-engine-the-deep-dive"></a>
 ## Docker Engine - The Deep Dive
 
 When Docker was released, had two major components
@@ -104,12 +148,14 @@ Summary: cgroups provide resource management and namespace provide isolation and
 
 </aside>
 
+<!-- TOC --><a name="get-rid-of-lxc"></a>
 ### Get rid of LXC
 
 LXC was an issue from start. First becouse is Linux-specific and the aspirations were of being multi-platform. Second becouse is risk to rely on an external tool for something so core.
 
 As a result, they develop a tool called libcontainer as a replacement for LXC. The goal was to access to the fundamental container building-blocks that exist in the host kernel.
 
+<!-- TOC --><a name="get-rid-of-the-monolithic-daemon"></a>
 ### Get rid of the monolithic daemon
 
 The plan was refactoring the daemon into small specialized tools that can be pieced together into larger tools. After all, all of the ***container execution*** and ***container runtime*** code entirely removed from the daemon and refactored into small, specialized tools.
@@ -118,22 +164,26 @@ In the old model, where all of container runtime logic was implemented in the da
 
 ![Untitled](images_docker/Untitled%202.png)
 
+<!-- TOC --><a name="runc"></a>
 ### runc
 
 runc is the reference implementation of the OCI container-runtime-spec. runc is a small lightweight CLI wrapper for libcontainer. 
 
 Its  purpose is to create containers. It is good and fast but as it’s a CLI wrapper, it’s effectively a standalone container runtime tool. This means you can download and build the binary, and you’ll have everithing you need to build and play with runc (OCI) containers. But you will have none of the richness that you get with the full-blown Docker engine.
 
+<!-- TOC --><a name="containerd"></a>
 ### containerd
 
 All of the container execution logic is ripped out and refactored into an new tool called containerd. Its sole purpose (at the beginning) was to manage the containers lifecycle.
 
 Eventually was branched out and taken on more functionalities such as *image pull*, *volumes* and *networks*. One of the reasons for these change of mind is to make it easier to use in other projects. However, all the extra functionality is modular and optional.
 
+<!-- TOC --><a name="starting-a-new-container"></a>
 ### Starting a new container
 
 ![Untitled](images_docker/Untitled%203.png)
 
+<!-- TOC --><a name="shim"></a>
 ### Shim
 
 The shim is integral to the implementation of daemonless containers.
@@ -146,6 +196,7 @@ Once a container’s parent runc process exits, the associated containerd-shim p
 - Keeping any STDIN and STDOUT streams open so that when the daemon is restarted, the container
 doesn’t terminate due to pipes being closed etc.
 
+<!-- TOC --><a name="securing-client-and-daemon-communication"></a>
 ### Securing client and daemon communication
 
 Docker implements a client-server model
@@ -167,6 +218,7 @@ You can secure both the client and the daemon. Securing the client forces the cl
 
 ![Untitled](images_docker/Untitled%205.png)
 
+<!-- TOC --><a name="images"></a>
 # Images
 
 A docker image is a read-only template containing instructions for creating a Docker container. It includes everything needed to run an application, such as the code, runtime, libraries, and dependencies.
@@ -184,6 +236,7 @@ Images are like classes. In fact, you can stop a container and create a new imag
 
 ![Untitled](images_docker/Untitled%206.png)
 
+<!-- TOC --><a name="images-and-containers"></a>
 ## Images and Containers
 
 We use `docker container run` and `docker service create` commands to start one or more containers from a single image. Once you’ve started a container from an image, the two constructs become dependent on each other and yoy cannot delete the image until the last container using it has been stopped and destroyed.
