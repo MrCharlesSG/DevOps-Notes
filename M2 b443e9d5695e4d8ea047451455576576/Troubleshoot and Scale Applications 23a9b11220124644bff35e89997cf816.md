@@ -202,7 +202,7 @@ Log in to the OpenShift cluster as the `developer` user with the `developer`�
         - Use the `oc set probe` command with the `--liveness` option to add the liveness probe that tests the `/env` path on HTTP port 8000.
             
             ```
-            [student@workstation ~]$oc set probe deployment/frontend --liveness \--get-url http://:8000/env
+            [student@workstation ~]$oc set probe deployment/frontend --liveness --get-url http://:8000/env
             deployment.apps/frontend probes updated
             ```
             

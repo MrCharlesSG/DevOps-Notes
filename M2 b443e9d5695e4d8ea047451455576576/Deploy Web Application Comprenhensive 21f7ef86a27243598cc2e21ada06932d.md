@@ -251,8 +251,6 @@
     
     ```bash
     oc set volumes deployment/*deploymentName* --remove --name=*volumeName*
-    
-    oc set volumes deployment/*deploymentName* --remove --name=*volumeName*
     ```
     
     Check
