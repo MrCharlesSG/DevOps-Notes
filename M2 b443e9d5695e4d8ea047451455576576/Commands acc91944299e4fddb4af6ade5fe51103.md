@@ -11,19 +11,19 @@ oc get pods
 - Deploy Application
     
     ```bash
-    oc create deployment *deploymentName* --image *imageName*:*ImageVersion* --replicas *numOfReplicas*
+    oc create deployment deploymentName --image imageName:ImageVersion --replicas numOfReplicas
     ```
     
     Check
     
     ```bash
-    oc get deployment *deploymentName* -o wide
+    oc get deployment deploymentName -o wide
     ```
     
 - Scale application
     
     ```bash
-    oc scale deployment/*deploymentName* --replicas *numReplicas*
+    oc scale deployment/deploymentName --replicas numReplicas
     ```
     
     Check
@@ -35,19 +35,19 @@ oc get pods
 - Expose Deployment
     
     ```bash
-    oc expose deployment *deploymentName* --port *listeningPort*
+    oc expose deployment deploymentName --port listeningPort
     ```
     
     check
     
     ```bash
-    oc describe service *deploymentName* 
+    oc describe service deploymentName 
     ```
     
 - Expose Service
     
     ```
-    oc expose service *deploymentName* 
+    oc expose service deploymentName 
     ```
     
     check
@@ -75,14 +75,14 @@ oc get pods
     An image stream stores references to specific images of external or internal repositories
     
     ```java
-    oc create istag *imageName:ImageVersion* --from-image i*mageRepo*
+    oc create istag imageName:ImageVersion --from-image imageRepo
     ```
     
     Check
     
     ```bash
     oc get istag
-    oc describe istag *imageName:ImageVersion*
+    oc describe istag imageName:ImageVersion
     ```
     
 - Create image lookup
@@ -90,7 +90,7 @@ oc get pods
     Lookup is a functionality for OpenShift to resolve which Image Streams are we refering
     
     ```bash
-    oc set image-lookup Image*name*
+    oc set image-lookup Imagename
     ```
     
     Check
@@ -102,7 +102,7 @@ oc get pods
 - Change Image of Deployment
     
     ```bash
-    oc set image deployment/*deploymentName containerName*=*newIageRepo*
+    oc set image deployment/deploymentName containerName=newIageRepo
     ```
     
 - Inpect Available image in repository
@@ -115,9 +115,9 @@ oc get pods
     ```
     
     ```
-    [student@workstation ~]$skopeo inspect *ImageRepo*
+    [student@workstation ~]$skopeo inspect ImageRepo
     ...output omitted...
-        "Name": "*ImageRepo*",
+        "Name": "ImageRepo",
         "Digest": "sha256:d282...f38f",
         "RepoTags": [
             "1-237",
@@ -139,14 +139,14 @@ oc get pods
 - Create Secrets from scrach
     
     ```bash
-    oc create secret generic *secretName* --from-literal *paramName1=paramValue1* --from-literal *paramName2=paramValue2...*
+    oc create secret generic secretName --from-literal paramName1=paramValue1 --from-literal paramName2=paramValue2...
     ```
     
     Check
     
     ```bash
-    oc get secret *secretName* 
-    oc describe secret *secretName* 
+    oc get secret secretName 
+    oc describe secret secretName 
     ```
     
 
@@ -155,13 +155,13 @@ oc get pods
 - Create a trigger of an image stream tag so it rollout everytime it changes
     
     ```bash
-    oc set triggers deployment/*deploymentName* --from-image *imageName:imageVersion --containers* containerOfImageName
+    oc set triggers deployment/deploymentName --from-image imageName:imageVersion --containers containerOfImageName
     ```
     
     Check
     
     ```bash
-    oc describe deployment *deploymentName*
+    oc describe deployment deploymentName
     ```
     
 
@@ -170,7 +170,7 @@ oc get pods
 - Set enviroment variables from secrets
     
     ```bash
-    oc set env deployment/deploymentName --from secret/*secretName* --prefix *prefix*
+    oc set env deployment/deploymentName --from secret/secretName --prefix prefix
     ```
     
     Check 
@@ -182,7 +182,7 @@ oc get pods
 - Declare enviroment variable
     
     ```bash
-    oc set env deployment/*deploymentName* *variableName=variableValue*
+    oc set env deployment/deploymentName variableName=variableValue
     ```
     
     Check 
@@ -197,20 +197,20 @@ oc get pods
 - Create volume
     
     ```bash
-    oc set volumes deployment/*deploymentName* --add --claim-class *storageClass* --claim-size *diskSpace(2Gi)* --mount-path *dataDirectory* 
+    oc set volumes deployment/deploymentName --add --claim-class storageClass --claim-size diskSpace(2Gi) --mount-path dataDirectory 
     ```
     
     Check
     
     ```bash
-    oc get deployment *deploymentName* -o jsonpath='{.spec.template.spec.volumes}'
-    oc describe deployment *deploymentName* 
+    oc get deployment deploymentName -o jsonpath='{.spec.template.spec.volumes}'
+    oc describe deployment deploymentName 
     ```
     
     remove a volume from a deployment.
     
     ```bash
-    oc set volumes deployment/*deploymentName* --remove --name=*volumeName*
+    oc set volumes deployment/deploymentName --remove --name=volumeName
     ```
     
     Check
@@ -219,7 +219,7 @@ oc get pods
 ### Resources
 
 ```bash
-oc set resources deployment/*deploymentsName* --requests cpu=*cpu*,memory=*memory* --limits cpu=cpu,memory=memory
+oc set resources deployment/deploymentsName --requests cpu=cpu,memory=memory --limits cpu=cpu,memory=memory
 # 5 militrones = 5m, 5GB = 5Gi, 5MB = 5Mi
 ```
 
@@ -228,20 +228,20 @@ oc set resources deployment/*deploymentsName* --requests cpu=*cpu*,memory=*memor
 - Create Pod from Image
     
     ```bash
-    oc run *podName* --image *imageRepo*
+    oc run podName --image imageRepo
     ```
     
 - Exec command in pod
     
     ```bash
-    oc exec -it *podmName* -- *command*
+    oc exec -it podmName -- command
     ```
     
 
 # Troubleshoot
 
 ```bash
-oc logs *podName*
+oc logs podName
 ```
 
 ```bash
@@ -249,17 +249,17 @@ oc get events
 ```
 
 ```bash
-oc describe pod *podName*
+oc describe pod podName
 ```
 
 # Probe
 
 ```bash
-oc set probe deployment/*deploymentName* --*option* -- *command*
+oc set probe deployment/deploymentName --option -- command
 ```
 
 ```bash
-oc set probe deployment/*deploymentName* --*option* --get-url *url*
+oc set probe deployment/deploymentName --option --get-url url
 ```
 
 - Options
