@@ -1,17 +1,15 @@
-Aquí tienes el archivo `README` para tu repositorio en inglés:
-
----
-
 # DevOps Notes
 
-This repository contains comprehensive notes and resources for preparing for the DevOps Kubernetes exams. The notes are divided into two main parts: **MidTerm 1** and **MidTerm 2**, each focusing on different topics and practical labs related to DevOps and Kubernetes.
+This repository contains comprehensive notes and resources for preparing for the DevOps Kubernetes exams. The notes are divided into two main parts: MidTerm 1 and MidTerm 2, each focusing on different topics and practical labs related to DevOps and Kubernetes.
 
-## Overview
+Additionally, there is a section dedicated to Docker Notes, which covers essential Docker concepts. These notes were presented to my colleagues as part of a study session and include fundamental topics like container creation, building Docker images, understanding Dockerfile instructions, and managing containers.
 
-- **MidTerm 1** focuses on containerization basics, creating and managing containers, Dockerfile instructions, networking, and persistence, among other foundational topics.
-- **MidTerm 2** dives deeper into troubleshooting, scaling applications, deploying web applications, and managing storage and application configurations in Kubernetes.
+Overview
+MidTerm 1 focuses on containerization basics, creating and managing containers, Dockerfile instructions, networking, and persistence, among other foundational topics.
 
-Additionally, there are some detailed notes on Docker usage and various practical labs for real-world application management using Kubernetes.
+MidTerm 2 dives deeper into troubleshooting, scaling applications, deploying web applications, and managing storage and application configurations in Kubernetes.
+
+Docker Notes covers core Docker concepts, providing practical insights for working with Docker containers and images. It also includes guidance for presenting these concepts effectively to peers in a study environment.
 
 ---
 
@@ -51,13 +49,3 @@ For more details, refer to the [MidTerm 2 markdown file](https://github.com/MrCh
 [Docker Notes](https://github.com/MrCharlesSG/DevOps-Notes/blob/main/DockerDoc.md)
 
 These notes are dedicated to Docker and its usage in a DevOps environment. I had to present this documentation to my colleagues as part of a study session. The notes cover essential Docker concepts such as container creation, building images, understanding Dockerfile instructions, and managing Docker containers effectively.
-
-For a detailed overview of Docker, visit the [Docker Documentation](https://github.com/MrCharlesSG/DevOps-Notes/blob/main/DockerDoc.md).
-
----
-
-Feel free to explore the individual sections for more in-depth information and practical examples for DevOps and Kubernetes exam preparation. 
-
----
-
-Let me know if you'd like any additional adjustments!
