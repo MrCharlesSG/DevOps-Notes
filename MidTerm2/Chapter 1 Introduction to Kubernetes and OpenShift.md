@@ -2,7 +2,7 @@
 
 ## Quiz 1
 
-![Untitled](Chapter%201%20Introduction%20to%20Kubernetes%20and%20OpenShift%20545096af66134b4194f1647242c4a8f3/1322179b-a222-4154-a9db-157f509630bf.png)
+![Untitled](Chapter%201%20Introduction%20to%20Kubernetes%20and%20OpenShift/1322179b-a222-4154-a9db-157f509630bf.png)
 
 ## Quiz 2
 
@@ -42,32 +42,32 @@
 
 1. Use a browser to view the login page at the `https://console-openshift-console.apps.ocp4.example.com` address.
     
-    ![Untitled](Chapter%201%20Introduction%20to%20Kubernetes%20and%20OpenShift%20545096af66134b4194f1647242c4a8f3/Untitled.png)
+    ![Untitled](Chapter%201%20Introduction%20to%20Kubernetes%20and%20OpenShift/Untitled.png)
     
 2. Click Red Hat Identity Management, and supply the `admin` username and the `redhatocp` password, and then click `Log in` to access the home page.
     
-    ![Untitled](Chapter%201%20Introduction%20to%20Kubernetes%20and%20OpenShift%20545096af66134b4194f1647242c4a8f3/Untitled%201.png)
+    ![Untitled](Chapter%201%20Introduction%20to%20Kubernetes%20and%20OpenShift/Untitled%201.png)
     
 
 ### View the cluster version on the Overview page for the cluster.
 
 1. From the **Home** → **Overview** page, scroll down to view the cluster details.
     
-    ![Untitled](Chapter%201%20Introduction%20to%20Kubernetes%20and%20OpenShift%20545096af66134b4194f1647242c4a8f3/Untitled%202.png)
+    ![Untitled](Chapter%201%20Introduction%20to%20Kubernetes%20and%20OpenShift/Untitled%202.png)
     
 2. Locate the OpenShift version in the Details section.
 
-![Untitled](Chapter%201%20Introduction%20to%20Kubernetes%20and%20OpenShift%20545096af66134b4194f1647242c4a8f3/Untitled%203.png)
+![Untitled](Chapter%201%20Introduction%20to%20Kubernetes%20and%20OpenShift/Untitled%203.png)
 
 ### View the available alert severity types within the filters on the Alerting page.
 
 1. Navigate to the **Observe** → **Alerting** page.
     
-    ![Untitled](Chapter%201%20Introduction%20to%20Kubernetes%20and%20OpenShift%20545096af66134b4194f1647242c4a8f3/Untitled%204.png)
+    ![Untitled](Chapter%201%20Introduction%20to%20Kubernetes%20and%20OpenShift/Untitled%204.png)
     
 2. Click the Filter drop-down to view the available severity options.
     
-    ![Untitled](Chapter%201%20Introduction%20to%20Kubernetes%20and%20OpenShift%20545096af66134b4194f1647242c4a8f3/Untitled%205.png)
+    ![Untitled](Chapter%201%20Introduction%20to%20Kubernetes%20and%20OpenShift/Untitled%205.png)
     
 
 ### View the labels for the `thanos-querier` route.
